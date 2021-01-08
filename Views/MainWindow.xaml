@@ -1,0 +1,53 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:itemsrepeaterissue.ViewModels;assembly=itemsrepeaterissue"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="itemsrepeaterissue.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="itemsrepeaterissue">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <ItemsRepeater Items="{Binding ItemGroups}" Margin="24">
+            <ItemsRepeater.Layout>
+                <StackLayout Spacing="24" />
+            </ItemsRepeater.Layout>
+
+            <ItemsRepeater.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Spacing="8">
+                        <StackPanel Name="GroupTitle" Orientation="Horizontal">
+                            <TextBlock Text="{Binding Title}" FontSize="24" />
+                        </StackPanel>
+
+                        <ItemsRepeater Items="{Binding Items}">
+                            <ItemsRepeater.Layout>
+                                <UniformGridLayout MaximumRowsOrColumns="2"
+                                                   MinColumnSpacing="12"
+                                                   MinRowSpacing="12"
+                                                   ItemsStretch="Fill" />
+                            </ItemsRepeater.Layout>
+
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="12" Background="#EEEEEE">
+                                        <StackPanel Spacing="6">
+                                            <TextBlock Text="Item name:" />
+                                            <TextBlock Text="{Binding}" />
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
+    </ScrollViewer>
+
+</Window>
